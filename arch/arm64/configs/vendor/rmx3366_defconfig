@@ -40,6 +40,7 @@ CONFIG_AUDIT_TREE=y
 
 # RSKSU
 CONFIG_KPM=y
+CONFIG_KSU_SUSFS=y
 
 #
 # IRQ subsystem
