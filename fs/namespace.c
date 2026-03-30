@@ -1147,13 +1147,12 @@ struct vfsmount *vfs_kern_mount(struct file_system_type *type,
 
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 	if (!susfs_is_sdcard_android_data_decrypted && susfs_is_current_ksu_domain()) {
-		mnt = susfs_alloc_non_unshare_ksu_vfsmnt(name);
-		if (IS_ERR(mnt))
-			return mnt;
-		return mnt;
+		struct mount *new_mnt = susfs_alloc_non_unshare_ksu_vfsmnt(name);
+		if (!new_mnt)
+			return ERR_PTR(-ENOMEM);
+		return &new_mnt->mnt;
 	}
 #endif
-
 	fc = fs_context_for_mount(type, flags);
 	if (IS_ERR(fc))
 		return ERR_CAST(fc);
