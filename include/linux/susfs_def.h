@@ -1,6 +1,6 @@
 #ifndef KSU_SUSFS_DEF_H
 #define KSU_SUSFS_DEF_H
-
+#include <linux/cred.h>
 #include <linux/bits.h>
 
 /********/
